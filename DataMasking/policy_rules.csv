@@ -1,0 +1,41 @@
+﻿Rule_ID,Column_Keyword,Data_Type_Expected,Sample_Pattern,Information_Type,Sensitivity_Label,Description,,Masking_Function
+1,"name, first_name, last_name, full_name, person_name","NVARCHAR, VARCHAR",,Name,Confidential,Identifies a person's name,,"partial(1,""XXXXXXX"",1)"
+2,"email, mail_id, email_address, official_email","NVARCHAR, VARCHAR",^[\w\.-]+@[\w\.-]+\.\w+$,Contact Info,Confidential,Email address,,email()
+3,"phone, mobile, contact_no, mob_no, telephone, alt_phone","NVARCHAR, VARCHAR, BIGINT","^\+?\d{10,13}$",Contact Info,Confidential,Mobile or phone numbers,,"partial(0,""XXXXXXX"",4)"
+4,"address, street, city, state, pincode, postal_code","NVARCHAR, VARCHAR",^\d{6}$,Contact Info,Confidential,Residential or postal address,,"partial(2,""XXXX"",2)"
+5,"pan, pan_no, pan_number","NVARCHAR, VARCHAR",^[A-Z]{5}[0-9]{4}[A-Z]$,National ID,Highly Confidential,PAN number,,"partial(0,""XXXXXXX"",3)"
+6,"aadhaar, aadhar, uid, aadhaar_no","NVARCHAR, VARCHAR, BIGINT",^\d{12}$,National ID,Highly Confidential,Aadhaar number,,"partial(0,""XXXXXXX"",4)"
+7,"account_no, acc_no, bank_account","VARCHAR, BIGINT","^\d{10,16}$",Banking,Highly Confidential,Bank account number,,"partial(0,""XXXXXXX"",4)"
+8,"ifsc, ifsc_code","NVARCHAR, VARCHAR",[A-Z]{4}0[A-Z0-9]{6},Banking,Confidential,IFSC code,,"partial(0,""XXXXXXX"",3)"
+9,"card_no, credit_card, debit_card","NVARCHAR, VARCHAR",^\d{16}$,Credit Card,Highly Confidential,Credit/Debit card number,,"partial(0,""XXXX-XXXX-XXXX-"",4)"
+10,"cvv, cvv_code","NVARCHAR, VARCHAR",^\d{3}$,Credit Card,Highly Confidential,Card verification value,,default()
+11,"upi_id, vpa, upi","NVARCHAR, VARCHAR",@,Banking,Confidential,UPI ID or Virtual Payment Address,,email()
+12,"salary, ctc, income, pay, compensation, wages,balance","DECIMAL, FLOAT, MONEY",,Financial,Confidential,Salary or income information,,"random(1000, 9999)"
+13,"emp_id, employee_id, staff_id, empno,agentid,customerid","INT, NVARCHAR",,Other ID,Internal,Employee identifier,,"partial(0,""EMPXXXX"",0)"
+14,"doj, hire_date, joining_date","DATE, DATETIME",,Date of Birth,Confidential,Employee joining date,,default()
+15,"patient_id, diagnosis, prescription, medical, hospital_id","NVARCHAR, VARCHAR",,Health,Highly Confidential,Medical or diagnostic data,,"partial(0,""XXXXXXX"",3)"
+16,"health_id, abha, abha_no","NVARCHAR, VARCHAR",^\d{14}$,Health,Highly Confidential,Health or ABHA ID,,"partial(0,""XXXXXXX"",2)"
+17,"voter_id, election_id","NVARCHAR, VARCHAR",^[A-Z]{3}[0-9]{7}$,National ID,Highly Confidential,Voter ID,,"partial(0,""XXXXXXX"",3)"
+18,"dl_no, driving_license, license_no","NVARCHAR, VARCHAR",^[A-Z]{2}[0-9]{13}$,National ID,Highly Confidential,Driving licence number,,"partial(0,""XXXXXXX"",4)"
+19,"passport, passport_no, passport_number","NVARCHAR, VARCHAR",^[A-Z]{1}[0-9]{7}$,National ID,Highly Confidential,Passport number,,"partial(0,""XXXXXXX"",3)"
+20,"gst, gstin, gst_no","NVARCHAR, VARCHAR",^\d{2}[A-Z]{5}\d{4}[A-Z]{1}[A-Z\d]{1}[Z]{1}[A-Z\d]{1}$,Financial,Highly Confidential,GSTIN,,"partial(0,""XXXXXXX"",3)"
+21,"vehicle_no, reg_no, rc_no","NVARCHAR, VARCHAR","^[A-Z]{2}[0-9]{2}[A-Z]{1,2}[0-9]{4}$",Other ID,Confidential,Vehicle registration number,,"partial(0,""XXXXXXX"",3)"
+22,"insurance_no, policy_no","NVARCHAR, VARCHAR",,Financial,Confidential,Insurance or policy number,,"partial(0,""XXXXXXX"",3)"
+23,"student_id, roll_no, reg_no","NVARCHAR, VARCHAR",,Name,Internal,Student identifier,,"partial(0,""STUXXXX"",0)"
+24,"marks, grade, cgpa, score","DECIMAL, FLOAT",,Financial,Confidential,Academic performance data,,"random(50, 100)"
+25,"dob, date_of_birth","DATE, DATETIME",,Date of Birth,Confidential,Birth date,,default()
+26,"gender, sex","NVARCHAR, VARCHAR",,Name,Confidential,Gender details,,"partial(0,""X"",0)"
+27,"ip_address, ipv4, ipv6","NVARCHAR, VARCHAR","^\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}$",Networking,Confidential,IP address,,"partial(0,""XXX.XXX.XXX."",0)"
+28,mac_address,"NVARCHAR, VARCHAR",^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$,Networking,Confidential,MAC address,,"partial(0,""XX:XX:XX:XX:"",0)"
+29,"username, login, userid","NVARCHAR, VARCHAR",,Credentials,Confidential,Usernames,,"partial(1,""XXXXXX"",0)"
+30,"password, passcode, pin","NVARCHAR, VARCHAR",,Credentials,Highly Confidential,Passwords or secret keys,,default()
+31,"age, years_old","INT, SMALLINT",,Date of Birth,Confidential,Age of individual,,"random(20,60)"
+32,"location, gps, latitude, longitude","NVARCHAR, VARCHAR",,Networking,Confidential,Location coordinates,,"partial(0,""XXXXXXX"",3)"
+33,"emergency_contact, alt_contact","NVARCHAR, VARCHAR",^\d{10}$,Contact Info,Confidential,Alternate contact number,,"partial(0,""XXXXXXX"",4)"
+34,"image, photo, picture","VARBINARY, NVARCHAR",,Name,Confidential,Image or biometric photo,,default()
+35,"fingerprint, biometric, retina, iris",VARBINARY,,Health,Highly Confidential,Biometric data,,default()
+36,"comments, feedback, notes","NVARCHAR, VARCHAR",,Other,General,Free text,,"partial(0,""XXXXXXXX"",0)"
+37,"legal_case_no, court_ref, caseid","NVARCHAR, VARCHAR",,Financial,Confidential,Legal or case reference,,"partial(0,""XXXXXXX"",3)"
+38,"api_key, token, secret","NVARCHAR, VARCHAR",,Credentials,Highly Confidential,API keys or tokens,,default()
+39,"device_id, imei","NVARCHAR, VARCHAR",^\d{15}$,Networking,Confidential,Device identifiers,,"partial(0,""XXXXXXXX"",0)"
+40,"passport_expiry, license_expiry, card_expiry",DATE,,Date of Birth,Confidential,Document expiry date,,default()
